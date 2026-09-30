@@ -50,3 +50,14 @@ add_custom_target(CONFIG_FILES ALL
 )
 
 add_dependencies(CONFIG_FILES proc-mon)
+
+# Copy icons to /usr/share/icons/hicolor/scalable/apps/ location
+set(ICONS_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/icons/")
+set(ICONS_DEST_DIR "/usr/share/icons/hicolor/scalable/apps/")
+
+add_custom_target(ICONS_FILES ALL
+    COMMAND sudo ${CMAKE_COMMAND} -E copy_directory "${ICONS_SRC_DIR}" "${ICONS_DEST_DIR}"
+    COMMENT "Copying icon files to ${ICONS_DEST_DIR} ..."
+)
+
+add_dependencies(ICONS_FILES proc-mon)
